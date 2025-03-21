@@ -1,0 +1,21 @@
+FROM postgres:16
+
+# Install pgvector extension and dependencies
+RUN apt-get update && apt-get install -y \
+    postgresql-server-dev-16 \
+    build-essential \
+    postgresql-plpython3-16 \
+    git \
+    && apt-get clean
+
+# Clone and install pgvector
+RUN git clone https://github.com/pgvector/pgvector.git \
+    && cd pgvector \
+    && make \
+    && make install
+
+# Add SQL scripts to be run on container initialization
+COPY ./init.sql /docker-entrypoint-initdb.d/
+
+# Expose PostgreSQL port
+EXPOSE 5432
