@@ -50,26 +50,34 @@ def store_embeddings(schema_info):
         conn = psycopg2.connect(**PG_CONFIG)
         cursor = conn.cursor()
         
-        # Create table for embeddings
+        # ✅ Create table for embeddings (with schema_details)
         cursor.execute("""
         CREATE TABLE IF NOT EXISTS schema_embeddings (
             table_name TEXT PRIMARY KEY,
-            embedding VECTOR(768)  -- Assuming 768 dimensions for embedding
+            schema_details TEXT,       -- ✅ New column to store table schema
+            embedding VECTOR(768)      -- Assuming 768 dimensions for embedding
         );
         """)
-        
+
         for table, columns in schema_info.items():
             schema_text = f"Table {table} has columns: " + ", ".join([col[0] for col in columns])
             embedding = generate_embedding(schema_text)
+
             if embedding:
-                cursor.execute("INSERT INTO schema_embeddings (table_name, embedding) VALUES (%s, %s) ON CONFLICT (table_name) DO NOTHING;", (table, json.dumps(embedding)))
+                # ✅ Insert or update schema details and embeddings
+                cursor.execute("""
+                    INSERT INTO schema_embeddings (table_name, schema_details, embedding)
+                    VALUES (%s, %s, %s)
+                    ON CONFLICT (table_name) DO UPDATE 
+                    SET schema_details = EXCLUDED.schema_details, embedding = EXCLUDED.embedding;
+                """, (table, schema_text, json.dumps(embedding)))
 
         conn.commit()
         conn.close()
-        print("Embeddings stored successfully! ✅")
+        print("✅ Embeddings stored successfully!")
 
     except Exception as e:
-        print("Error storing embeddings:", e)
+        print("❌ Error storing embeddings:", e)
 
 # Run the schema extraction & embedding process
 if __name__ == "__main__":

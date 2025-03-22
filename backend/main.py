@@ -6,13 +6,47 @@ import re  # Add this import for regex
 from config import DB_CONFIG, PG_CONFIG
 import schema_extractor  # Runs automatically on import
 import psycopg2
-
+import numpy as np
 
 app = FastAPI()
 
 # Define request model
 class QueryRequest(BaseModel):
     user_input: str
+    store_in_vector_db: bool = False
+    analysis: bool = False
+
+def get_embedding(text: str):
+    """Generate embeddings using Ollama."""
+    response = requests.post("http://localhost:11434/api/embeddings", json={"model": "nomic-embed-text", "prompt": "{text}"})
+    return np.array(response.json()["embedding"]).tolist()
+
+def store_embeddings_in_pgvector(text: str):
+    """Store text embeddings in pgvector."""
+    embedding = get_embedding(text)
+    try:
+        conn = psycopg2.connect(**PG_CONFIG)
+        cursor = conn.cursor()
+        cursor.execute(
+            "INSERT INTO vector_store (content, embedding) VALUES (%s, %s)",
+            (text, embedding)
+        )
+        
+        conn.commit()
+        cursor.close()
+        conn.close()
+        return {"status": "success", "message": "Embedding stored"}
+    
+    except Exception as e:
+        return {"error": f"Failed to store embedding: {e}"}
+
+def generate_analysis(data):
+    """Converts raw SQL results into human-readable insights."""
+    response = requests.post(
+        "http://localhost:11434/api/generate",
+        json={"model": "llama3", "prompt": f"Summarize the following data: {data}", "stream": False}
+    )
+    return response.json().get("response", "").strip()
 
 def test_db_connection():
     try:
@@ -67,22 +101,44 @@ def extract_clean_sql(llm_response: str) -> str:
     clean_text = re.sub(r'\s+', ' ', clean_text).lower()
     return clean_text.strip()
 
+def generate_embedding(text):
+    """Get embedding using Ollama."""
+    ollama_url = "http://localhost:11434/api/embeddings"
+    payload = {"model": "nomic-embed-text", "prompt": text}
+    
+    try:
+        response = requests.post(ollama_url, json=payload)
+        response.raise_for_status()
+        embedding = response.json().get("embedding", [])
+        return embedding
+    except Exception as e:
+        return str(e)
+
 def get_relevant_schema_info(user_input: str):
     """
-    Retrieves the most relevant table schema information for the query.
+    Fetches the most relevant schema details using vector similarity search.
     """
     try:
         conn = psycopg2.connect(**PG_CONFIG)
         cursor = conn.cursor()
 
-        # This query will later use vector similarity search
-        cursor.execute("SELECT table_name, schema_details FROM schema_embeddings")
+        # Convert user query to an embedding
+        embedding = generate_embedding(user_input)  # Use your embedding model (e.g., Nomic)
+        # Perform similarity search (cosine distance)
+        cursor.execute("""
+            SELECT table_name, schema_details 
+            FROM schema_embeddings
+            ORDER BY embedding <-> ARRAY%s
+            LIMIT 3;
+        """ % embedding)
+        
         schema_info = cursor.fetchall()
+        print(schema_info, "schema_info")
         
         cursor.close()
         conn.close()
 
-        # Format the schema information
+        # Format the retrieved schema
         schema_text = "\n".join([f"Table: {row[0]} - Schema: {row[1]}" for row in schema_info])
         return schema_text
 
@@ -101,6 +157,7 @@ def generate_sql_from_nl(user_input: str):
         "prompt": f"Database Schema:\n{schema_context}\n\nConvert this to SQL: {user_input}",
         "stream": False
     }
+    # print(payload, "payload")
 
     try:
         response = requests.post(ollama_url, json=payload)
@@ -111,16 +168,25 @@ def generate_sql_from_nl(user_input: str):
     except Exception as e:
         return str(e)
 
-def execute_sql_query(sql_query: str):
-    print(sql_query)
-    # Note: Removed the 'return' statement that was stopping execution
+def execute_sql_query(sql_query: str, store_in_vector_db=False, analysis=False):
+    """Executes SQL, optionally stores results in pgvector, and generates analysis."""
     try:
         conn = mysql.connector.connect(**DB_CONFIG)
         cursor = conn.cursor(dictionary=True)
         cursor.execute(sql_query)
         result = cursor.fetchall()
         conn.close()
-        return result
+
+        output = {"sql": sql_query, "data": result}
+
+        if analysis:
+            output["analysis"] = generate_analysis(result)
+
+        if store_in_vector_db:
+            store_embeddings_in_pgvector(result)
+
+        return output
+
     except Exception as e:
         return {"error": str(e)}
 
@@ -167,5 +233,4 @@ async def process_query(request: QueryRequest):
     if "error" in sql_query:
         return {"error": sql_query}
     
-    data = execute_sql_query(sql_query)
-    return {"sql": sql_query, "data": data}
+    return execute_sql_query(sql_query, request.store_in_vector_db, request.analysis)

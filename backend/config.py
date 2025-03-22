@@ -1,8 +1,8 @@
 DB_CONFIG = {
     "host": "localhost",
     "user": "root",
-    "password": "password",
-    "database": "dh_name"
+    "password": "redhat123",
+    "database": "lifecycle"
 }
 
 PG_CONFIG = {

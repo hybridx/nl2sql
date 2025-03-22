@@ -2,20 +2,50 @@
 
 The NL2SQL pipeline allows users to write queries in plain English. An AI model then converts these queries into SQL, fetches data from a database, and generates an analysis.
 
+## Inside backend folder
 
 ```sh
-python3 -m venv ~/.venvs/aienv                                                                                                                                 aienv
+python3 -m venv ~/.venvs/
 source ~/.venvs/aienv/bin/activate
+
+pip install -r requirements.txt
 
 podman build -t pgvector-db .
 podman run --name pgvector -p 5432:5432 -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=admin -e POSTGRES_DB=nl2sql -d pgvector-db
-
-CREATE EXTENSION IF NOT EXISTS vector;
-
 podman exec -it pgvector psql -U admin -d nl2sql
-SELECT version();
-
 ```
+## Inside `#nl2sql=`
+```sql
+CREATE EXTENSION IF NOT EXISTS vector;
+SELECT version();
+```
+
+
+```sh
+python schema_extractor.py
+```
+
+## Inside `#nl2sql=`
+```sql
+SELECT column_name, data_type 
+FROM information_schema.columns 
+WHERE table_name = 'schema_embeddings';
+```
+
+✅ Expected output:
+```sh
+column_name    |  data_type   
+---------------+--------------
+table_name     | text
+schema_details | text
+embedding      | USER-DEFINED
+```
+
+## Run the application
+```sh
+uvicorn main:app --reload       
+```
+
 ## Features
 - **Natural Language Input**: Write queries in plain English.
 - **AI Conversion**: An AI model translates the natural language queries into SQL.
