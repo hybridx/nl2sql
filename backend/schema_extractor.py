@@ -54,8 +54,8 @@ def store_embeddings(schema_info):
         cursor.execute("""
         CREATE TABLE IF NOT EXISTS schema_embeddings (
             table_name TEXT PRIMARY KEY,
-            schema_details TEXT,       -- ✅ New column to store table schema
-            embedding VECTOR(768)      -- Assuming 768 dimensions for embedding
+            schema_details TEXT,      
+            embedding VECTOR(768)
         );
         """)
 

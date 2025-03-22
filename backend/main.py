@@ -10,6 +10,11 @@ import numpy as np
 
 app = FastAPI()
 
+EMBEDDING_MODEL = "nomic-embed-text"
+AI_MODEL = "codestral"
+OLLAMA_EMBEDDINGS_URL = "http://localhost:11434/api/embeddings"
+OLLAMA_GENERATE_URL = "http://localhost:11434/api/generate"
+
 # Define request model
 class QueryRequest(BaseModel):
     user_input: str
@@ -18,7 +23,7 @@ class QueryRequest(BaseModel):
 
 def get_embedding(text: str):
     """Generate embeddings using Ollama."""
-    response = requests.post("http://localhost:11434/api/embeddings", json={"model": "nomic-embed-text", "prompt": "{text}"})
+    response = requests.post(OLLAMA_EMBEDDINGS_URL, json={"model": EMBEDDING_MODEL, "prompt": "{text}"})
     return np.array(response.json()["embedding"]).tolist()
 
 def store_embeddings_in_pgvector(text: str):
@@ -43,8 +48,8 @@ def store_embeddings_in_pgvector(text: str):
 def generate_analysis(data):
     """Converts raw SQL results into human-readable insights."""
     response = requests.post(
-        "http://localhost:11434/api/generate",
-        json={"model": "llama3", "prompt": f"Summarize the following data: {data}", "stream": False}
+        OLLAMA_GENERATE_URL,
+        json={"model": AI_MODEL, "prompt": f"Summarize the following data: {data}", "stream": False}
     )
     return response.json().get("response", "").strip()
 
@@ -103,8 +108,8 @@ def extract_clean_sql(llm_response: str) -> str:
 
 def generate_embedding(text):
     """Get embedding using Ollama."""
-    ollama_url = "http://localhost:11434/api/embeddings"
-    payload = {"model": "nomic-embed-text", "prompt": text}
+    ollama_url = OLLAMA_EMBEDDINGS_URL
+    payload = {"model": EMBEDDING_MODEL, "prompt": text}
     
     try:
         response = requests.post(ollama_url, json=payload)
@@ -122,24 +127,28 @@ def get_relevant_schema_info(user_input: str):
         conn = psycopg2.connect(**PG_CONFIG)
         cursor = conn.cursor()
 
-        # Convert user query to an embedding
-        embedding = generate_embedding(user_input)  # Use your embedding model (e.g., Nomic)
-        # Perform similarity search (cosine distance)
-        cursor.execute("""
-            SELECT table_name, schema_details 
+        # Convert user query to an embedding (returns a list of floats)
+        embedding = generate_embedding(user_input)
+
+        # Convert embedding list to PostgreSQL vector format
+        embedding_str = f"[{','.join(map(str, embedding))}]"  # Wrap in square brackets
+
+        # Perform similarity search with explicit casting
+        query = """
+            SELECT table_name
             FROM schema_embeddings
-            ORDER BY embedding <-> ARRAY%s
+            ORDER BY embedding <-> %s::vector
             LIMIT 3;
-        """ % embedding)
-        
+        """
+        cursor.execute(query, (embedding_str,))  # Use safe parameterized query
+
         schema_info = cursor.fetchall()
-        print(schema_info, "schema_info")
-        
+
         cursor.close()
         conn.close()
 
         # Format the retrieved schema
-        schema_text = "\n".join([f"Table: {row[0]} - Schema: {row[1]}" for row in schema_info])
+        schema_text = "\n".join([f"Table: {row[0]}" for row in schema_info])
         return schema_text
 
     except Exception as e:
@@ -150,19 +159,35 @@ def generate_sql_from_nl(user_input: str):
     Converts natural language to SQL using Ollama, with schema context.
     """
     schema_context = get_relevant_schema_info(user_input)
+    print(schema_context)
     
-    ollama_url = "http://localhost:11434/api/generate"
+    ollama_url = OLLAMA_GENERATE_URL
+
+    prompt = f"""
+### Instructions:
+Your task is to convert a question into a SQL query, given a Mariadb database schema.
+Adhere to these rules:
+- **Deliberately go through the question `{user_input}`. and database schema {schema_context} word by word** to appropriately answer the question
+- **Ensure that the SQL query is correct and relevant to the question**
+- **Use the correct SQL syntax and keywords**
+- **Do not include any irrelevant information**
+- **Do not include any personal opinions or comments**
+- **Do not include any SQL comments**
+- **Keep the SQL query concise and to the point and easy**
+- **Reply sql inside ```sql ```**
+"""
     payload = {
-        "model": "codestral",
-        "prompt": f"Database Schema:\n{schema_context}\n\nConvert this to SQL: {user_input}",
-        "stream": False
+      "model": AI_MODEL,
+      "prompt": prompt,
+      "stream": False
     }
-    # print(payload, "payload")
+    print(payload)
 
     try:
         response = requests.post(ollama_url, json=payload)
         response.raise_for_status()
         raw_response = response.json().get("response", "").strip()
+        print(raw_response)
         clean_sql = extract_clean_sql(raw_response)
         return clean_sql
     except Exception as e:
