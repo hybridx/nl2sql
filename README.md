@@ -15,7 +15,7 @@ The NL2SQL pipeline allows users to write queries in plain English. An AI model 
 python3 -m venv ~/.venvs/
 source ~/.venvs/aienv/bin/activate
 
-pip install -r requirements.txt
+pip install -r backend/requirements.txt
 
 podman build -t pgvector-db .
 podman run --name pgvector -p 5432:5432 -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=admin -e POSTGRES_DB=nl2sql -d pgvector-db
@@ -50,6 +50,7 @@ embedding      | USER-DEFINED
 
 ## Run the application
 ```sh
+cd backend
 uvicorn main:app --reload       
 ```
 
