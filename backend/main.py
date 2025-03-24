@@ -11,7 +11,7 @@ import numpy as np
 app = FastAPI()
 
 EMBEDDING_MODEL = "nomic-embed-text"
-AI_MODEL = "codestral"
+AI_MODEL = "deepseek-r1:14b"
 OLLAMA_EMBEDDINGS_URL = "http://localhost:11434/api/embeddings"
 OLLAMA_GENERATE_URL = "http://localhost:11434/api/generate"
 

@@ -2,6 +2,13 @@
 
 The NL2SQL pipeline allows users to write queries in plain English. An AI model then converts these queries into SQL, fetches data from a database, and generates an analysis.
 
+## Prerequisites
+
+- Ollama
+  - `deepseek-r1:14b`
+  - `nomic-embed-text`
+- Podman
+
 ## Inside backend folder
 
 ```sh
