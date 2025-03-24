@@ -6,6 +6,7 @@ The NL2SQL pipeline allows users to write queries in plain English. An AI model 
 
 - Ollama
   - `deepseek-r1:14b`
+  - `nomic-embed-text`
 - Podman
 
 ## Inside backend folder
