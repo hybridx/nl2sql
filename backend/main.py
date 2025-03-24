@@ -11,7 +11,7 @@ import numpy as np
 app = FastAPI()
 
 EMBEDDING_MODEL = "nomic-embed-text"
-AI_MODEL = "deepseek-r1:14b"
+AI_MODEL = "qwq:32b"
 OLLAMA_EMBEDDINGS_URL = "http://localhost:11434/api/embeddings"
 OLLAMA_GENERATE_URL = "http://localhost:11434/api/generate"
 
@@ -120,35 +120,33 @@ def generate_embedding(text):
         return str(e)
 
 def get_relevant_schema_info(user_input: str):
-    """
-    Fetches the most relevant schema details using vector similarity search.
-    """
+    """Fetches the most relevant schema details using vector similarity search."""
     try:
         conn = psycopg2.connect(**PG_CONFIG)
         cursor = conn.cursor()
 
-        # Convert user query to an embedding (returns a list of floats)
+        # Generate the embedding (list of floats)
         embedding = generate_embedding(user_input)
 
-        # Convert embedding list to PostgreSQL vector format
-        embedding_str = f"[{','.join(map(str, embedding))}]"  # Wrap in square brackets
+        if not embedding:
+            return "Error: Failed to generate query embedding"
 
-        # Perform similarity search with explicit casting
-        query = """
-            SELECT table_name
+        # Convert to PostgreSQL vector format
+        embedding_vector = "[" + ",".join(map(str, embedding)) + "]"
+
+        # Similarity search query
+        cursor.execute("""
+            SELECT table_name, schema_details
             FROM schema_embeddings
             ORDER BY embedding <-> %s::vector
-            LIMIT 3;
-        """
-        cursor.execute(query, (embedding_str,))  # Use safe parameterized query
+            LIMIT 5;
+        """, (embedding_vector,))
 
         schema_info = cursor.fetchall()
-
         cursor.close()
         conn.close()
 
-        # Format the retrieved schema
-        schema_text = "\n".join([f"Table: {row[0]}" for row in schema_info])
+        schema_text = "\n".join([f"Table: {row[0]} - {row[1]}" for row in schema_info])
         return schema_text
 
     except Exception as e:
@@ -160,31 +158,29 @@ def generate_sql_from_nl(user_input: str):
     """
     schema_context = get_relevant_schema_info(user_input)
     print(schema_context)
-    
-    ollama_url = OLLAMA_GENERATE_URL
+    if "Error" in schema_context:
+        return schema_context
 
     prompt = f"""
 ### Instructions:
-Your task is to convert a question into a SQL query, given a Mariadb database schema.
-Adhere to these rules:
-- **Deliberately go through the question `{user_input}`. and database schema {schema_context} word by word** to appropriately answer the question
-- **Ensure that the SQL query is correct and relevant to the question**
-- **Use the correct SQL syntax and keywords**
-- **Do not include any irrelevant information**
-- **Do not include any personal opinions or comments**
-- **Do not include any SQL comments**
-- **Keep the SQL query concise and to the point and easy**
-- **Reply sql inside ```sql ```**
+Convert the question into SQL using the database schema.
+- **User Question:** {user_input}
+- **Database Schema:** {schema_context}
+
+Rules:
+- Ensure the SQL query is correct.
+- Use the correct SQL syntax.
+- Return the SQL inside ```sql ``` blocks.
 """
     payload = {
-      "model": AI_MODEL,
-      "prompt": prompt,
-      "stream": False
+        "model": AI_MODEL,
+        "prompt": prompt,
+        "stream": False
     }
     print(payload)
 
     try:
-        response = requests.post(ollama_url, json=payload)
+        response = requests.post(OLLAMA_GENERATE_URL, json=payload)
         response.raise_for_status()
         raw_response = response.json().get("response", "").strip()
         print(raw_response)
