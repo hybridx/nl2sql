@@ -11,7 +11,7 @@ import numpy as np
 app = FastAPI()
 
 EMBEDDING_MODEL = "nomic-embed-text"
-AI_MODEL = "sqlcoder:15b"
+AI_MODEL = "codestral"
 OLLAMA_EMBEDDINGS_URL = "http://localhost:11434/api/embeddings"
 OLLAMA_GENERATE_URL = "http://localhost:11434/api/generate"
 
