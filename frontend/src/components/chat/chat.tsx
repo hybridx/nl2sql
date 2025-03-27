@@ -1,15 +1,10 @@
-"use client";
-
 import ChatTopbar from "./chat-topbar";
 import ChatList from "./chat-list";
 import ChatBottombar from "./chat-bottombar";
-import { AIMessage, HumanMessage } from "@langchain/core/messages";
-import { BytesOutputParser } from "@langchain/core/output_parsers";
 import { Attachment, ChatRequestOptions, generateId } from "ai";
 import { Message, useChat } from "ai/react";
-import React, { useEffect, useRef, useState } from "react";
+import React, {useRef } from "react";
 import { toast } from "sonner";
-import { v4 as uuidv4 } from "uuid";
 import useChatStore from "@/app/hooks/useChatStore";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -125,16 +120,16 @@ export default function Chat({ initialMessages, id, isMobile }: ChatProps) {
       />
 
       {messages.length === 0 ? (
-        <div className="flex flex-col h-full w-full items-center gap-4 justify-center">
+        <div className="flex flex-col h-full w-full items-start gap-4 justify-center">
           <Image
             src="/ollama.png"
             alt="AI"
             width={40}
             height={40}
-            className="h-16 w-14 object-contain dark:invert"
+            className="h-8 w-8 object-contain dark:invert"
           />
           <p className="text-center text-base text-muted-foreground">
-            How can I help you today?
+            Hi, I'm your Assistant. How can I help you?
           </p>
           <ChatBottombar
             input={input}

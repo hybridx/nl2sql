@@ -1,24 +1,15 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { ChatProps } from "./chat";
-import Link from "next/link";
-import { cn } from "@/lib/utils";
-import { Button, buttonVariants } from "../ui/button";
-import TextareaAutosize from "react-textarea-autosize";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  Cross2Icon,
-  ImageIcon,
-  PaperPlaneIcon,
-  StopIcon,
-} from "@radix-ui/react-icons";
+import { Button } from "../ui/button";
+import { AnimatePresence } from "framer-motion";
+import { Cross2Icon, StopIcon } from "@radix-ui/react-icons";
 import { Mic, SendHorizonal } from "lucide-react";
 import useSpeechToText from "@/app/hooks/useSpeechRecognition";
 import MultiImagePicker from "../image-embedder";
 import useChatStore from "@/app/hooks/useChatStore";
 import Image from "next/image";
-import { ChatRequestOptions, Message } from "ai";
+import { ChatRequestOptions } from "ai";
 import { ChatInput } from "../ui/chat/chat-input";
 
 interface ChatBottombarProps {
@@ -72,12 +63,11 @@ export default function ChatBottombar({
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();
-      console.log("Input focused");
     }
   }, [inputRef]);
 
   return (
-    <div className="px-4 pb-7 flex justify-between w-full items-center relative ">
+    <div className="pb-7 flex justify-between w-full items-center relative ">
       <AnimatePresence initial={false}>
         <form
           onSubmit={handleSubmit}
