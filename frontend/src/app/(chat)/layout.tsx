@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Red_Hat_Text } from "next/font/google";
 import "../globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 
-const inter = Inter({ subsets: ["latin"] });
+const redHatText = Red_Hat_Text({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Ollama UI",
-  description: "Ollama chatbot web interface",
+  title: "NLtoSQL AI Chatbot",
+  description: "NLtoSQL chatbot web interface",
 };
 
 export const viewport = {
@@ -25,8 +25,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`antialiased tracking-tight ${inter.className}`}>
-        <ThemeProvider attribute="class" defaultTheme="dark">
+      <body className={`antialiased tracking-tight ${redHatText.className}`}>
+        <ThemeProvider attribute="class" defaultTheme="light">
           {children}
           <Toaster />
         </ThemeProvider>
