@@ -1,61 +1,12 @@
-# Next.js Frontend App
+# React + Vite
 
-This is a simple frontend application built using Next.js.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Prerequisites
+Currently, two official plugins are available:
 
-Ensure you have the following installed:
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-- [Node.js](https://nodejs.org/) (LTS version recommended)
-- [npm](https://www.npmjs.com/) (comes with Node.js)
+## Expanding the ESLint configuration
 
-## Getting Started
-
-### 1. Clone the Repository
-
-```sh
-git clone https://github.com/hybridx/nl2sql
-cd /frontend
-```
-
-### 2. Install Dependencies
-
-```sh
-npm install
-```
-
-### 3. Run the Development Server
-
-```sh
-npm run dev
-```
-
-The app should now be running at [http://localhost:3000](http://localhost:3000).
-
-## Available Scripts
-
-### Start Development Server
-
-```sh
-npm run dev
-```
-
-Runs the app in development mode.
-
-### Build for Production
-
-```sh
-npm run build
-```
-
-Running the Model Server
-
-Ensure your model is running on host localhost and port 11434.
-
-## Learn More
-
-To learn more about Next.js, check out the [Next.js documentation](https://nextjs.org/docs).
-
-```
-
-```
+If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
