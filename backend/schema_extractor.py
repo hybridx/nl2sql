@@ -5,7 +5,7 @@ from config import DB_CONFIG, PG_CONFIG
 import requests
 
 OLLAMA_URL = "http://localhost:11434/api/embeddings"
-EMBED_MODEL = "nomic-embed-text"
+EMBED_MODEL = "mxbai-embed-large:latest" # 1024 if mxbai , 768 if nomic
 
 def get_db_schema():
     """Fetch table structure from MariaDB."""
@@ -62,7 +62,7 @@ def store_embeddings(schema_info):
         CREATE TABLE IF NOT EXISTS schema_embeddings (
             table_name TEXT PRIMARY KEY,
             schema_details TEXT,      
-            embedding VECTOR(768)
+            embedding VECTOR(1024)
         );
         """)
 

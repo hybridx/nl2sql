@@ -10,8 +10,9 @@ import numpy as np
 
 app = FastAPI()
 
-EMBEDDING_MODEL = "nomic-embed-text"
-AI_MODEL = "qwq:32b"
+EMBEDDING_MODEL = "mxbai-embed-large:latest"
+AI_MODEL_ANALYSIS = "llama3.2:3b"
+AI_MODEL_SQL = 'granite-code:8b'
 OLLAMA_EMBEDDINGS_URL = "http://localhost:11434/api/embeddings"
 OLLAMA_GENERATE_URL = "http://localhost:11434/api/generate"
 
@@ -49,7 +50,7 @@ def generate_analysis(data):
     """Converts raw SQL results into human-readable insights."""
     response = requests.post(
         OLLAMA_GENERATE_URL,
-        json={"model": AI_MODEL, "prompt": f"Summarize the following data: {data}", "stream": False}
+        json={"model": AI_MODEL_ANALYSIS, "prompt": f"Summarize the following data: {data}", "stream": False}
     )
     return response.json().get("response", "").strip()
 
@@ -173,7 +174,7 @@ Rules:
 - Return the SQL inside ```sql ``` blocks.
 """
     payload = {
-        "model": AI_MODEL,
+        "model": AI_MODEL_SQL,
         "prompt": prompt,
         "stream": False
     }
