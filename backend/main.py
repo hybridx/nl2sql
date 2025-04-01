@@ -11,8 +11,8 @@ import numpy as np
 app = FastAPI()
 
 EMBEDDING_MODEL = "mxbai-embed-large:latest"
-AI_MODEL = "deepseek-r1:14b",
 AI_MODEL_ANALYSIS = "llama3.2:3b"
+AI_MODEL_SQL = 'granite-code:8b'
 OLLAMA_EMBEDDINGS_URL = "http://localhost:11434/api/embeddings"
 OLLAMA_GENERATE_URL = "http://localhost:11434/api/generate"
 
@@ -174,7 +174,7 @@ Rules:
 - Return the SQL inside ```sql ``` blocks.
 """
     payload = {
-        "model": AI_MODEL,
+        "model": AI_MODEL_SQL,
         "prompt": prompt,
         "stream": False
     }
