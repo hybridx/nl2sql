@@ -1,3 +1,7 @@
+:root {
+  font-family: "Red Hat Text";
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
