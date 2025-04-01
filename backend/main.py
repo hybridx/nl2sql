@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import mysql.connector
 import requests
@@ -9,6 +10,19 @@ import psycopg2
 import numpy as np
 
 app = FastAPI()
+
+origins = [
+    "http://localhost:5173",
+    "http://127.0.0.1:8000/",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 EMBEDDING_MODEL = "mxbai-embed-large:latest"
 AI_MODEL_ANALYSIS = "llama3.2:3b"
