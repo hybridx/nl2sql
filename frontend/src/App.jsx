@@ -1,13 +1,29 @@
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
+import {
+  Button,
+  Card,
+  CardBody,
+  CardTitle,
+  ClipboardCopy,
+  Checkbox,
+  Spinner,
+  TextInput,
+  Alert,
+  Title,
+} from "@patternfly/react-core";
+import { Table, Thead, Tr, Th, Td, Tbody } from "@patternfly/react-table";
+import "@patternfly/react-core/dist/styles/base.css";
 import "./index.css";
 
 export default function App() {
   const [userInput, setUserInput] = useState("");
   const [enableAnalysis, setEnableAnalysis] = useState(false);
+  const [isLoading, setisLoading] = useState(false);
 
   const fetchQuery = useMutation({
     mutationFn: async () => {
+      setisLoading(true);
       const response = await fetch("http://127.0.0.1:8000/query", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -19,108 +35,125 @@ export default function App() {
       if (!response.ok) {
         throw new Error("Failed to fetch data");
       }
+      setisLoading(false);
       return response.json();
     },
   });
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-gray-100">
-      <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-[1440px]">
-        <h1 className="text-xl font-bold mb-4">Bee Assistant</h1>
-        <input
-          type="text"
-          className="w-full p-2 border rounded mb-2"
-          placeholder="Ask a question..."
-          value={userInput}
-          onChange={(e) => setUserInput(e.target.value)}
-        />
-        <label className="flex items-center mb-4">
-          <input
-            type="checkbox"
-            className="mr-2"
-            checked={enableAnalysis}
-            onChange={() => setEnableAnalysis(!enableAnalysis)}
-          />
-          Enable Analysis
-        </label>
-        <button
-          className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
-          onClick={() => fetchQuery.mutate()}
-          disabled={fetchQuery.isLoading}
-        >
-          {fetchQuery.isLoading ? "Loading..." : "Submit"}
-        </button>
-        {fetchQuery.isError && (
-          <div className="mt-2 text-red-600">
-            {fetchQuery.error.message}.{" "}
-            <button
-              className="text-blue-500"
-              onClick={() => fetchQuery.mutate()}
-            >
-              Retry
-            </button>
-          </div>
-        )}
-        {fetchQuery.data && (
-          <div className="mt-4">
-            <h2 className="text-lg font-semibold">Results</h2>
-            <pre className="p-2 bg-gray-200 rounded text-sm overflow-auto">
-              {JSON.stringify(fetchQuery.data.sql, null, 2)}
-            </pre>
-            <div className="mt-4 overflow-x-auto max-w-[1440px] w-full">
-              <table className="w-full border-collapse border border-gray-300">
-                <thead>
-                  <tr className="bg-gray-200">
-                    {Object.keys(fetchQuery.data.data[0] || {}).map((key) => (
-                      <th
-                        key={key}
-                        className="border p-2 text-left whitespace-nowrap"
-                      >
-                        {key}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {fetchQuery.data.data.map((row, index) => (
-                    <tr key={index} className="border">
-                      {Object.entries(row).map(([key, value], i) => (
-                        <td
-                          key={i}
-                          className="border p-2 text-sm truncate max-w-[200px]"
-                        >
-                          {typeof value === "string" &&
-                          value.startsWith("http") ? (
-                            <a
-                              href={value}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-blue-500 underline hover:text-blue-700"
-                            >
-                              {value.length > 30
-                                ? `${value.substring(0, 30)}...`
-                                : value}
-                            </a>
-                          ) : typeof value === "string" && value.length > 30 ? (
-                            `${value.substring(0, 30)}...`
-                          ) : (
-                            value
-                          )}
-                        </td>
-                      ))}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+      <div className="w-full max-w-[1440px]">
+        <Card>
+          <CardTitle>Bee Assistant</CardTitle>
+          <CardBody>
+            <div className="w-full rounded mb-2">
+              <TextInput
+                type="text"
+                aria-label="Ask a question"
+                placeholder="Ask a question..."
+                value={userInput}
+                onChange={(_event, value) => setUserInput(value)}
+              />
             </div>
-            {fetchQuery.data.analysis && (
-              <div className="mt-4 p-4 bg-yellow-100 rounded">
-                <h2 className="text-lg font-semibold">Analysis</h2>
-                <p>{fetchQuery.data.analysis}</p>
-              </div>
+            <div className="mb-4">
+              <Checkbox
+                label="Enable Analysis"
+                isChecked={enableAnalysis}
+                onChange={(_event, checked) => setEnableAnalysis(checked)}
+                id="enable-analysis"
+              />
+            </div>
+
+            <div className="flex items-center justify-center mb-4">
+              <Button variant="primary" onClick={() => fetchQuery.mutate()}>
+                Submit
+              </Button>
+            </div>
+
+            {isLoading && (
+              <>
+                <div className="flex items-center justify-center">
+                  <Spinner
+                    size="xl"
+                    aria-label="Contents of the basic example"
+                  />
+                </div>
+              </>
             )}
-          </div>
-        )}
+            {fetchQuery.data && (
+              <>
+                <Title className="py-4" headingLevel="h2">
+                  Results
+                </Title>
+                <ClipboardCopy isReadOnly>
+                  {JSON.stringify(fetchQuery.data.sql, null, 2)}
+                </ClipboardCopy>
+
+                <div className="mt-4 overflow-x-auto max-w-[1440px] w-full">
+                  <div className="max-h-[800px] overflow-y-auto mt-4">
+                    <Table
+                      aria-label="Results table"
+                      variant="default"
+                      isStickyHeader
+                    >
+                      <Thead>
+                        <Tr>
+                          {Object.keys(fetchQuery.data.data[0] || {}).map(
+                            (key) => (
+                              <Th key={key}>{key}</Th>
+                            )
+                          )}
+                        </Tr>
+                      </Thead>
+                      <Tbody>
+                        {fetchQuery.data.data.map((row, index) => (
+                          <Tr key={index} className="border">
+                            {Object.entries(row).map(([key, value], i) => (
+                              <Td
+                                key={i}
+                                dataLabel={key}
+                                className="border p-2 text-sm truncate max-w-[200px]"
+                              >
+                                {typeof value === "string" &&
+                                value.trim().startsWith("http") ? (
+                                  <a
+                                    href={value}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-blue-500 underline hover:text-blue-700"
+                                  >
+                                    {value.length > 30
+                                      ? `${value.substring(0, 30)}...`
+                                      : value}
+                                  </a>
+                                ) : typeof value === "string" &&
+                                  value.length > 30 ? (
+                                  `${value.substring(0, 30)}...`
+                                ) : (
+                                  value
+                                )}
+                              </Td>
+                            ))}
+                          </Tr>
+                        ))}
+                      </Tbody>
+                    </Table>
+                  </div>
+                </div>
+
+                {fetchQuery.data.analysis && (
+                  <Alert
+                    variant="info"
+                    title="Analysis"
+                    className="mt-4 p-4 bg-yellow-100 rounded"
+                  >
+                    {fetchQuery.data.analysis}
+                  </Alert>
+                )}
+              </>
+            )}
+          </CardBody>
+        </Card>
       </div>
     </div>
   );
