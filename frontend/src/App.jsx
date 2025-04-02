@@ -25,7 +25,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-gray-100">
-      <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-2xl">
+      <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-[1440px]">
         <h1 className="text-xl font-bold mb-4">Bee Assistant</h1>
         <input
           type="text"
@@ -67,28 +67,52 @@ export default function App() {
             <pre className="p-2 bg-gray-200 rounded text-sm overflow-auto">
               {JSON.stringify(fetchQuery.data.sql, null, 2)}
             </pre>
-            <table className="w-full mt-2 border-collapse border border-gray-300">
-              <thead>
-                <tr className="bg-gray-200">
-                  {Object.keys(fetchQuery.data.data[0] || {}).map((key) => (
-                    <th key={key} className="border p-2">
-                      {key}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {fetchQuery.data.data.map((row, index) => (
-                  <tr key={index} className="border">
-                    {Object.values(row).map((value, i) => (
-                      <td key={i} className="border p-2">
-                        {value}
-                      </td>
+            <div className="mt-4 overflow-x-auto max-w-[1440px] w-full">
+              <table className="w-full border-collapse border border-gray-300">
+                <thead>
+                  <tr className="bg-gray-200">
+                    {Object.keys(fetchQuery.data.data[0] || {}).map((key) => (
+                      <th
+                        key={key}
+                        className="border p-2 text-left whitespace-nowrap"
+                      >
+                        {key}
+                      </th>
                     ))}
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {fetchQuery.data.data.map((row, index) => (
+                    <tr key={index} className="border">
+                      {Object.entries(row).map(([key, value], i) => (
+                        <td
+                          key={i}
+                          className="border p-2 text-sm truncate max-w-[200px]"
+                        >
+                          {typeof value === "string" &&
+                          value.startsWith("http") ? (
+                            <a
+                              href={value}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-blue-500 underline hover:text-blue-700"
+                            >
+                              {value.length > 30
+                                ? `${value.substring(0, 30)}...`
+                                : value}
+                            </a>
+                          ) : typeof value === "string" && value.length > 30 ? (
+                            `${value.substring(0, 30)}...`
+                          ) : (
+                            value
+                          )}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
             {fetchQuery.data.analysis && (
               <div className="mt-4 p-4 bg-yellow-100 rounded">
                 <h2 className="text-lg font-semibold">Analysis</h2>
