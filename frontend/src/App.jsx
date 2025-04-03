@@ -1,14 +1,10 @@
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import {
-  Button,
   Card,
   CardBody,
   CardTitle,
   ClipboardCopy,
-  Checkbox,
-  Spinner,
-  TextInput,
 } from "@patternfly/react-core";
 import "@patternfly/react-core/dist/styles/base.css";
 import "./index.css";
@@ -57,24 +53,31 @@ export default function App() {
             />
 
             {isLoading && <LoadingIndicator />}
-
-            {fetchQuery.data && (
-              <>
-                <ClipboardCopy isReadOnly className="mt-4">
-                  {JSON.stringify(fetchQuery.data.sql, null, 2)}
-                </ClipboardCopy>
-
-                <ResultsTable data={fetchQuery.data.data} />
-                <div
-                  style={{ borderTop: "1px solid gray", margin: "16px 0" }}
-                ></div>
-                {fetchQuery.data.analysis && enableAnalysis && (
-                  <AnalysisSection analysisContent={fetchQuery.data.analysis} />
-                )}
-              </>
-            )}
           </CardBody>
         </Card>
+        {fetchQuery.data && (
+          <div className="mt-4">
+            <Card>
+              <CardBody>
+                <>
+                  <ClipboardCopy isReadOnly className="mt-4">
+                    {JSON.stringify(fetchQuery.data.sql, null, 2)}
+                  </ClipboardCopy>
+
+                  <ResultsTable data={fetchQuery.data.data} />
+                  <div
+                    style={{ borderTop: "1px solid gray", margin: "16px 0" }}
+                  ></div>
+                  {fetchQuery.data.analysis && enableAnalysis && (
+                    <AnalysisSection
+                      analysisContent={fetchQuery.data.analysis}
+                    />
+                  )}
+                </>
+              </CardBody>
+            </Card>
+          </div>
+        )}
       </div>
     </div>
   );
