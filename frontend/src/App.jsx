@@ -1,20 +1,18 @@
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import {
-  Button,
   Card,
   CardBody,
   CardTitle,
   ClipboardCopy,
-  Checkbox,
-  Spinner,
-  TextInput,
-  Alert,
-  Title,
 } from "@patternfly/react-core";
-import { Table, Thead, Tr, Th, Td, Tbody } from "@patternfly/react-table";
 import "@patternfly/react-core/dist/styles/base.css";
 import "./index.css";
+
+import QueryForm from "./components/QueryForm";
+import LoadingIndicator from "./components/LoadingIndicator";
+import ResultsTable from "./components/ResultsTable";
+import AnalysisSection from "./components/AnalysisSection";
 
 export default function App() {
   const [userInput, setUserInput] = useState("");
@@ -46,114 +44,40 @@ export default function App() {
         <Card>
           <CardTitle>Bee Assistant</CardTitle>
           <CardBody>
-            <div className="w-full rounded mb-2">
-              <TextInput
-                type="text"
-                aria-label="Ask a question"
-                placeholder="Ask a question..."
-                value={userInput}
-                onChange={(_event, value) => setUserInput(value)}
-              />
-            </div>
-            <div className="mb-4">
-              <Checkbox
-                label="Enable Analysis"
-                isChecked={enableAnalysis}
-                onChange={(_event, checked) => setEnableAnalysis(checked)}
-                id="enable-analysis"
-              />
-            </div>
+            <QueryForm
+              userInput={userInput}
+              setUserInput={setUserInput}
+              enableAnalysis={enableAnalysis}
+              setEnableAnalysis={setEnableAnalysis}
+              onSubmit={() => fetchQuery.mutate()}
+            />
 
-            <div className="flex items-center justify-center mb-4">
-              <Button variant="primary" onClick={() => fetchQuery.mutate()}>
-                Submit
-              </Button>
-            </div>
-
-            {isLoading && (
-              <>
-                <div className="flex items-center justify-center">
-                  <Spinner
-                    size="xl"
-                    aria-label="Contents of the basic example"
-                  />
-                </div>
-              </>
-            )}
-            {fetchQuery.data && (
-              <>
-                <Title className="py-4" headingLevel="h2">
-                  Results
-                </Title>
-                <ClipboardCopy isReadOnly>
-                  {JSON.stringify(fetchQuery.data.sql, null, 2)}
-                </ClipboardCopy>
-
-                <div className="mt-4 overflow-x-auto max-w-[1440px] w-full">
-                  <div className="max-h-[800px] overflow-y-auto mt-4">
-                    <Table
-                      aria-label="Results table"
-                      variant="default"
-                      isStickyHeader
-                    >
-                      <Thead>
-                        <Tr>
-                          {Object.keys(fetchQuery.data.data[0] || {}).map(
-                            (key) => (
-                              <Th key={key}>{key}</Th>
-                            )
-                          )}
-                        </Tr>
-                      </Thead>
-                      <Tbody>
-                        {fetchQuery.data.data.map((row, index) => (
-                          <Tr key={index} className="border">
-                            {Object.entries(row).map(([key, value], i) => (
-                              <Td
-                                key={i}
-                                dataLabel={key}
-                                className="border p-2 text-sm truncate max-w-[200px]"
-                              >
-                                {typeof value === "string" &&
-                                value.trim().startsWith("http") ? (
-                                  <a
-                                    href={value}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="text-blue-500 underline hover:text-blue-700"
-                                  >
-                                    {value.length > 30
-                                      ? `${value.substring(0, 30)}...`
-                                      : value}
-                                  </a>
-                                ) : typeof value === "string" &&
-                                  value.length > 30 ? (
-                                  `${value.substring(0, 30)}...`
-                                ) : (
-                                  value
-                                )}
-                              </Td>
-                            ))}
-                          </Tr>
-                        ))}
-                      </Tbody>
-                    </Table>
-                  </div>
-                </div>
-
-                {fetchQuery.data.analysis && (
-                  <Alert
-                    variant="info"
-                    title="Analysis"
-                    className="mt-4 p-4 bg-yellow-100 rounded"
-                  >
-                    {fetchQuery.data.analysis}
-                  </Alert>
-                )}
-              </>
-            )}
+            {isLoading && <LoadingIndicator />}
           </CardBody>
         </Card>
+        {fetchQuery.data && (
+          <div className="mt-4">
+            <Card>
+              <CardBody>
+                <>
+                  <ClipboardCopy isReadOnly className="mt-4">
+                    {JSON.stringify(fetchQuery.data.sql, null, 2)}
+                  </ClipboardCopy>
+
+                  <ResultsTable data={fetchQuery.data.data} />
+                  <div
+                    style={{ borderTop: "1px solid gray", margin: "16px 0" }}
+                  ></div>
+                  {fetchQuery.data.analysis && enableAnalysis && (
+                    <AnalysisSection
+                      analysisContent={fetchQuery.data.analysis}
+                    />
+                  )}
+                </>
+              </CardBody>
+            </Card>
+          </div>
+        )}
       </div>
     </div>
   );
