@@ -5,8 +5,9 @@ The NL2SQL pipeline enables users to write queries in plain English. An AI model
 ## Prerequisites
 
 - **Ollama**
-  - `qwq:32b`
-  - `nomic-embed-text`
+  - `mxbai-embed-large:latest`
+  - `llama3.2:3b`
+  - `qwen2.5-coder`
 - **Podman**
 - **Node.js** (LTS version recommended)
 - **npm**
