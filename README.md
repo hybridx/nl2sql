@@ -6,6 +6,14 @@
 
 [Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/js?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
 
+- **Ollama**
+  - `mxbai-embed-large:latest`
+  - `llama3.2:3b`
+  - `qwen2.5-coder`
+- **Podman**
+- **Node.js** (LTS version recommended)
+- **npm**
+
 ## Finish your CI setup
 
 [Click here to finish setting up your workspace!](https://cloud.nx.app/connect/jM1PeP52tQ)
