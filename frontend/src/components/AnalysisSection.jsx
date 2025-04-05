@@ -6,7 +6,6 @@ import {
   ClipboardCopyButton,
   Button,
 } from "@patternfly/react-core";
-import { PlayIcon } from "@patternfly/react-icons";
 
 const AnalysisSection = ({ analysisContent }) => {
   const [copiedStates, setCopiedStates] = useState({});
@@ -34,7 +33,7 @@ const AnalysisSection = ({ analysisContent }) => {
           line.trim() ? (
             <p key={`text-${index}-${i}`} className="mb-2">
               {line.startsWith("* ") ? (
-                <span className="pl-2">• {line.substring(2)}</span>
+                <li className="pl-2">{line.substring(2)}</li>
               ) : (
                 line
               )}
@@ -64,13 +63,6 @@ const AnalysisSection = ({ analysisContent }) => {
                   ? "Successfully copied to clipboard!"
                   : "Copy to clipboard"}
               </ClipboardCopyButton>
-            </CodeBlockAction>
-            <CodeBlockAction>
-              <Button
-                variant="plain"
-                aria-label="Play icon"
-                icon={<PlayIcon />}
-              />
             </CodeBlockAction>
           </>
         );
