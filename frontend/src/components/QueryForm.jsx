@@ -10,7 +10,7 @@ const QueryForm = ({
 }) => {
   return (
     <>
-      <div className="w-full rounded mb-2">
+      <div className="mb-4">
         <TextInput
           type="text"
           aria-label="Ask a question"
