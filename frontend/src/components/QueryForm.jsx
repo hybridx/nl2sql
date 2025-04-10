@@ -8,6 +8,13 @@ const QueryForm = ({
   setEnableAnalysis,
   onSubmit,
 }) => {
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      onSubmit();
+    }
+  };
+
   return (
     <>
       <div className="mb-4">
@@ -17,6 +24,7 @@ const QueryForm = ({
           placeholder="Ask a question..."
           value={userInput}
           onChange={(_event, value) => setUserInput(value)}
+          onKeyDown={handleKeyDown}
         />
       </div>
       <div className="mb-4">

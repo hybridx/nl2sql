@@ -39,10 +39,15 @@ export default function App() {
     },
   });
 
+  const hasData =
+    fetchQuery.data?.data &&
+    Array.isArray(fetchQuery.data.data) &&
+    fetchQuery.data.data.length > 0;
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-gray-100">
       <div className="w-full max-w-[1440px]">
-        {fetchQuery.data && (
+        {fetchQuery.data && hasData && (
           <div>
             <div className="flex items-center justify-end m-4">
               <Banner className="w-fit rounded-lg">{userInput}</Banner>
