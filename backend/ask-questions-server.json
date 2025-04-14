@@ -1,0 +1,15 @@
+{
+  "name": "Ask Question Server",
+  "entry": "python",
+  "args": ["mcp_server.py"],
+  "cwd": "/absolute/path/to/your/project",
+  "description": "Natural language to SQL tool",
+  "tags": ["sql", "nlp", "database", "tool"],
+  "dependencies": [],
+  "env": {
+    "PG_HOST": "localhost",
+    "PG_USER": "admin",
+    "PG_PASSWORD": "admin",
+    "PG_DATABASE": "nl2sql"
+  }
+}
