@@ -8,15 +8,23 @@ const QueryForm = ({
   setEnableAnalysis,
   onSubmit,
 }) => {
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      onSubmit();
+    }
+  };
+
   return (
     <>
-      <div className="w-full rounded mb-2">
+      <div className="mb-4">
         <TextInput
           type="text"
           aria-label="Ask a question"
           placeholder="Ask a question..."
           value={userInput}
           onChange={(_event, value) => setUserInput(value)}
+          onKeyDown={handleKeyDown}
         />
       </div>
       <div className="mb-4">
