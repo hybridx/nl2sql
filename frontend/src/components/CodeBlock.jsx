@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import {
-  CodeBlock as PFCodeBlock,
+  CodeBlock,
   CodeBlockAction,
   CodeBlockCode,
   ClipboardCopyButton,
-  Button,
 } from "@patternfly/react-core";
-import { PlayIcon } from "@patternfly/react-icons";
 
 const CodeBlock = ({ code, language, blockId = "code-block" }) => {
   const [isCopied, setIsCopied] = useState(false);
@@ -36,22 +34,14 @@ const CodeBlock = ({ code, language, blockId = "code-block" }) => {
           {isCopied ? "Successfully copied to clipboard!" : "Copy to clipboard"}
         </ClipboardCopyButton>
       </CodeBlockAction>
-      <CodeBlockAction>
-        <Button variant="plain" aria-label="Play icon" icon={<PlayIcon />} />
-      </CodeBlockAction>
     </>
   );
 
   return (
     <div className="mb-4">
-      {language && (
-        <div className="bg-gray-700 text-white text-xs px-4 py-1 rounded-t">
-          {language}
-        </div>
-      )}
-      <PFCodeBlock actions={codeBlockActions}>
+      <CodeBlock actions={codeBlockActions}>
         <CodeBlockCode id={blockId}>{code}</CodeBlockCode>
-      </PFCodeBlock>
+      </CodeBlock>
     </div>
   );
 };
