@@ -23,9 +23,14 @@ It exposes tools for retrieving weather alerts, forecasts, and solar data for an
 3. **Run the application:**
 
    ```bash
-   node src/index.js
+   npm run dev
    ```
 
+4. **Build for Production:**
+
+   ```bash
+   npm run build
+   ```
 ---
 
 ## 🖥 Using Claude Desktop
