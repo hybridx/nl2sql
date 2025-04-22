@@ -54,7 +54,7 @@ It exposes tools for retrieving weather alerts, forecasts, and solar data for an
        "weather": {
          "command": "node",
          "args": [
-           "/ABSOLUTE/PATH/TO/PARENT/FOLDER/weather/build/index.js"
+           "/ABSOLUTE/PATH/TO/PARENT/FOLDER/nl2sql/mcp-servers/Aditya/weather/build/index.js"
          ]
        }
      }
