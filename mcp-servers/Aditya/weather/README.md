@@ -10,7 +10,7 @@ It exposes tools for retrieving weather alerts, forecasts, and solar data for an
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/your-username/weather-mcp-server.git
+   git clone git@github.com:AdityaPatil22/nl2sql.git
    cd nl2sql/mcp-servers/Aditya/weather
    ```
 
