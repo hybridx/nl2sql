@@ -1,8 +1,8 @@
 {
-  "name": "Ask Question Server",
+  "name": "Red Hat Products database",
   "entry": "python",
   "args": ["mcp_server.py"],
-  "cwd": "/absolute/path/to/your/project",
+  "cwd": "/Users/denair/testing/nl2sql/backend",
   "description": "Natural language to SQL tool",
   "tags": ["sql", "nlp", "database", "tool"],
   "dependencies": [],
