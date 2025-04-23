@@ -6,6 +6,7 @@ dist
 *.iml
 *.log
 .DS_STORE
+package-lock.json
 
 .env
 .env.local
