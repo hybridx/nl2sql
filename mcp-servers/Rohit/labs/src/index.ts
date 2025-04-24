@@ -1,7 +1,6 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
-import Fuse from "fuse.js";
 
 // Define interfaces for lab data
 interface Lab {
@@ -226,13 +225,49 @@ function loadLabData(): Lab[] {
 }
 
 function findMatchingLab(query: string, labs: Lab[]): Lab | null {
-  const fuse = new Fuse(labs, {
-    keys: ["name", "description", "id"],
-    threshold: 0.3, // lower means more strict
+  if (!labs || labs.length === 0) {
+    return null;
+  }
+
+  const queryLower = query.toLowerCase();
+
+  const matchedLabs = labs.map((lab) => {
+    const descLower = lab.description.toLowerCase();
+    const nameLower = lab.name.toLowerCase();
+    const idLower = lab.id.toLowerCase();
+
+    // Calculate a score based on keyword matches
+    const words = queryLower.split(/\s+/).filter((word) => word.length > 2);
+
+    let score = 0;
+    for (const word of words) {
+      // Weight matches in name higher than in description
+      if (nameLower.includes(word)) {
+        score += 2;
+      }
+      if (descLower.includes(word)) {
+        score += 1;
+      }
+      if (idLower.includes(word)) {
+        score += 1.5;
+      }
+    }
+
+    return {
+      ...lab,
+      score,
+    };
   });
 
-  const results = fuse.search(query);
-  return results.length > 0 ? results[0].item : null;
+  // Sort by score
+  matchedLabs.sort((a, b) => b.score - a.score);
+
+  // Return the best match if it has some relevance
+  if (matchedLabs[0].score > 0) {
+    return matchedLabs[0];
+  }
+
+  return null;
 }
 
 // Register lab finder tool
