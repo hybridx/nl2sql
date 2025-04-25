@@ -1,148 +1,90 @@
-# NL2SQL Pipeline
+# Nl2sql
 
-The NL2SQL pipeline enables users to write queries in plain English. An AI model then converts these queries into SQL, fetches data from a database, and generates an analysis.
+<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
 
-## Prerequisites
+✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
 
-- **Ollama**
-  - `qwq:32b`
-  - `nomic-embed-text`
-- **Podman**
-- **Node.js** (LTS version recommended)
-- **npm**
+[Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/js?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
 
-## Backend Setup
+## Finish your CI setup
 
-### 1. Setting Up Virtual Environment
+[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/jM1PeP52tQ)
+
+
+## Generate a library
 
 ```sh
-python3 -m venv ~/.venvs/aienv
-source ~/.venvs/aienv/bin/activate
+npx nx g @nx/js:lib packages/pkg1 --publishable --importPath=@my-org/pkg1
 ```
 
-### 2. Install Dependencies
+## Run tasks
+
+To build the library use:
 
 ```sh
-pip install -r backend/requirements.txt
+npx nx build pkg1
 ```
 
-### 3. Set Up PostgreSQL with pgvector
+To run any task with Nx use:
 
 ```sh
-podman build -t pgvector-db .
-podman run --name pgvector -p 5432:5432 \
-  -e POSTGRES_USER=admin \
-  -e POSTGRES_PASSWORD=admin \
-  -e POSTGRES_DB=nl2sql \
-  -d pgvector-db
-
-podman exec -it pgvector psql -U admin -d nl2sql
+npx nx <target> <project-name>
 ```
 
-### 4. Enable Vector Extension in PostgreSQL
+These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
 
-```sql
-CREATE EXTENSION IF NOT EXISTS vector;
-SELECT version();
+[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+
+## Versioning and releasing
+
+To version and release the library use
+
+```
+npx nx release
 ```
 
-### 5. Extract Schema Information
+Pass `--dry-run` to see what would happen without actually releasing the library.
+
+[Learn more about Nx release &raquo;](hhttps://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+
+## Keep TypeScript project references up to date
+
+Nx automatically updates TypeScript [project references](https://www.typescriptlang.org/docs/handbook/project-references.html) in `tsconfig.json` files to ensure they remain accurate based on your project dependencies (`import` or `require` statements). This sync is automatically done when running tasks such as `build` or `typecheck`, which require updated references to function correctly.
+
+To manually trigger the process to sync the project graph dependencies information to the TypeScript project references, run the following command:
 
 ```sh
-python backend/schema_extractor.py
+npx nx sync
 ```
 
-### 6. Verify Schema Embeddings Table
-
-```sql
-SELECT column_name, data_type
-FROM information_schema.columns
-WHERE table_name = 'schema_embeddings';
-```
-
-✅ Expected output:
+You can enforce that the TypeScript project references are always in the correct state when running in CI by adding a step to your CI job configuration that runs the following command:
 
 ```sh
-column_name    |  data_type
----------------+--------------
-table_name     | text
-schema_details | text
-embedding      | USER-DEFINED
+npx nx sync:check
 ```
 
-### 7. Run the Backend Application
+[Learn more about nx sync](https://nx.dev/reference/nx-commands#sync)
 
-```sh
-cd backend
-uvicorn main:app --reload
-```
 
-## Frontend Setup
+[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 
-### 1. Navigate to the Project Directory
+## Install Nx Console
 
-```sh
-cd frontend
-```
+Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
 
-### 2. Install Dependencies
+[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 
-```sh
-npm install
-```
+## Useful links
 
-### 3. Start the Development Server
+Learn more:
 
-```sh
-npm start
-```
+- [Learn more about this workspace setup](https://nx.dev/nx-api/js?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
+- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 
-### 4. Build for Production
-
-```sh
-npm run build
-```
-
-### 5. Additional Commands
-
-- `npm test` - Run tests
-- `npm run lint` - Check for linting issues
-- `npm run eject` - Eject the create-react-app configuration (if applicable)
-
-## Features
-
-- **Natural Language Input**: Write queries in plain English.
-- **AI Conversion**: The AI model translates natural language queries into SQL.
-- **Data Fetching**: The generated SQL queries fetch data from the database.
-- **Analysis Generation**: The fetched data is analyzed and presented.
-
-## Usage
-
-1. **Input Query**: Enter your query in plain English.
-2. **AI Processing**: The AI model processes the query and converts it into SQL.
-3. **Data Retrieval**: The SQL query is executed on the database to retrieve the data.
-4. **Analysis Output**: The retrieved data is analyzed and the results are displayed.
-
-## Example
-
-- **Input**: "Show me the total sales for the last quarter."
-- **Output**: SQL query to fetch the total sales data for the last quarter, along with the resulting analysis.
-
-## Requirements
-
-- A database with relevant data.
-- An AI model capable of converting natural language to SQL.
-
-## Installation
-
-To install the NL2SQL pipeline, follow these steps:
-
-1. Clone the repository.
-2. Install the required dependencies.
-3. Configure the database connection.
-
-## License
-
-This project is licensed under the Apache License. See the [LICENSE](LICENSE) file for details.
-
-Happy coding! 🚀
+And join the Nx community:
+- [Discord](https://go.nx.dev/community)
+- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
+- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
+- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)

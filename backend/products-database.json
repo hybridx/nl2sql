@@ -1,5 +1,5 @@
 {
-  "name": "Red Hat Products database",
+  "name": "Products database",
   "entry": "python",
   "args": ["mcp_server.py"],
   "cwd": "/Users/denair/testing/nl2sql/backend",
