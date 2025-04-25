@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+      "weather": {
+          "command": "node",
+          "args": [
+              "/Users/denair/testing/nl2sql/mcp-servers/Deepesh/build/index.js"
+          ]
+      }
+  }
+}
