@@ -1,9 +1,15 @@
 {
   "mcpServers": {
-      "weather": {
+      "products": {
           "command": "node",
           "args": [
-              "/Users/denair/testing/nl2sql/mcp-servers/Deepesh/build/index.js"
+              "/Users/denair/testing/nl2sql/packages/products/build/index.js"
+          ]
+      },
+      "labs": {
+          "command": "node",
+          "args": [
+              "/Users/denair/testing/nl2sql/packages/labs/build/index.js"
           ]
       }
   }

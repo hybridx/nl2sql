@@ -12,9 +12,17 @@
 
 
 ## Generate a library
-
 ```sh
-npx nx g @nx/js:lib packages/pkg1 --publishable --importPath=@my-org/pkg1
+# For the core MCP server (assuming Node.js)
+nx generate @nx/node:application mcp-server
+
+# For shared libraries
+nx generate @nx/js:library common-utils
+nx generate @nx/js:library mcp-protocol
+
+# For context providers as libraries
+nx generate @nx/js:library context-provider-search
+nx generate @nx/js:library context-provider-database
 ```
 
 ## Run tasks
