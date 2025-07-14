@@ -8,7 +8,7 @@ OLLAMA_URL = "http://localhost:11434/api/embeddings"
 EMBED_MODEL = "mxbai-embed-large:latest" # 1024 if mxbai , 768 if nomic
 
 def get_db_schema():
-    """Fetch table structure from MariaDB."""
+    """Fetch complete database schema metadata from MariaDB."""
     try:
         conn = mysql.connector.connect(**DB_CONFIG)
         cursor = conn.cursor()
@@ -23,14 +23,44 @@ def get_db_schema():
             cursor.execute(f"DESCRIBE {table};")
             columns = cursor.fetchall()
 
-            schema_info[table] = [
-                {
-                    "name": col[0],   # Column name
-                    "type": col[1],   # Data type
-                    "key": col[3]     # PRIMARY KEY, FOREIGN KEY, etc.
-                }
-                for col in columns
-            ]
+            cursor.execute(f"SHOW CREATE TABLE {table};")
+            create_table_stmt = cursor.fetchone()[1]
+
+            cursor.execute(f"SELECT COUNT(*) FROM {table};")
+            row_count = cursor.fetchone()[0]
+
+            schema_info[table] = {
+                "columns": [
+                    {
+                        "name": col[0],   # Column name
+                        "type": col[1],   # Data type
+                        "null": col[2],   # NULL or NOT NULL
+                        "key": col[3],    # PRIMARY KEY, FOREIGN KEY, etc.
+                        "default": col[4], # Default value
+                        "extra": col[5]   # Extra info (e.g., auto_increment)
+                    }
+                    for col in columns
+                ],
+                "create_statement": create_table_stmt,
+                "row_count": row_count,
+                "relations": []
+            }
+
+        # Extract Foreign Key Relationships
+        cursor.execute("""
+            SELECT TABLE_NAME, COLUMN_NAME, REFERENCED_TABLE_NAME, REFERENCED_COLUMN_NAME
+            FROM information_schema.KEY_COLUMN_USAGE
+            WHERE TABLE_SCHEMA = %s AND REFERENCED_TABLE_NAME IS NOT NULL;
+        """, (DB_CONFIG["database"],))
+        
+        for row in cursor.fetchall():
+            table, column, ref_table, ref_column = row
+            if table in schema_info:
+                schema_info[table]["relations"].append({
+                    "column": column,
+                    "related_table": ref_table,
+                    "related_column": ref_column
+                })
 
         conn.close()
         return schema_info
@@ -66,8 +96,15 @@ def store_embeddings(schema_info):
         );
         """)
 
-        for table, columns in schema_info.items():
-            schema_text = f"Table `{table}` Columns: " + ", ".join([f"{col['name']} ({col['type']}) {col['key']}" for col in columns])
+        for table, details in schema_info.items():
+            schema_text = f"Table `{table}` Columns: " + ", ".join([f"{col['name']} ({col['type']}) {col['key']}" for col in details["columns"]])
+            
+            if details["relations"]:
+                relations_text = ", ".join([f"{rel['column']} -> {rel['related_table']}.{rel['related_column']}" for rel in details["relations"]])
+                schema_text += f". Relationships: {relations_text}"
+            
+            schema_text += f". Row Count: {details['row_count']}. CREATE Statement: {details['create_statement']}"
+            
             embedding = generate_embedding(schema_text)
 
             if embedding:
@@ -88,4 +125,5 @@ def store_embeddings(schema_info):
 if __name__ == "__main__":
     schema_info = get_db_schema()
     if schema_info:
+        print(json.dumps(schema_info, indent=2))
         store_embeddings(schema_info)

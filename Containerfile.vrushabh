@@ -1,0 +1,14 @@
+# Use the official MariaDB base image
+FROM mariadb:latest
+
+# Set environment variables
+ENV MYSQL_ROOT_PASSWORD=student123 \
+    MYSQL_DATABASE=student
+
+# Install unzip
+RUN apt-get update && apt-get install -y unzip
+
+COPY *.sql /docker-entrypoint-initdb.d/
+
+# Expose MariaDB port
+EXPOSE 3306

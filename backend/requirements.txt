@@ -1,3 +1,5 @@
 mysql-connector-python-rf
 requests
 psycopg2-binary
+fastapi
+uvicorn
