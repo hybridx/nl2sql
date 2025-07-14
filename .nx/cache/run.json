@@ -1,0 +1,21 @@
+{
+  "run": {
+    "command": "nx build products",
+    "startTime": "2025-05-05T09:13:17.071Z",
+    "endTime": "2025-05-05T09:13:17.932Z",
+    "inner": false
+  },
+  "tasks": [
+    {
+      "taskId": "products:build",
+      "target": "build",
+      "projectName": "products",
+      "hash": "5434902427679024991",
+      "startTime": "2025-05-05T09:13:17.142Z",
+      "endTime": "2025-05-05T09:13:17.929Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 0
+    }
+  ]
+}

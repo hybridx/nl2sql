@@ -1,0 +1,924 @@
+{
+  "mcp-client/client-setup": {
+    "root": [
+      "mcp-client/client-setup/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "projectType": [
+      "mcp-client/client-setup/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets": [
+      "mcp-client/client-setup/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck": [
+      "mcp-client/client-setup/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.dependsOn": [
+      "mcp-client/client-setup/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.options": [
+      "mcp-client/client-setup/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.cache": [
+      "mcp-client/client-setup/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.inputs": [
+      "mcp-client/client-setup/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.outputs": [
+      "mcp-client/client-setup/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.syncGenerators": [
+      "mcp-client/client-setup/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.metadata": [
+      "mcp-client/client-setup/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.executor": [
+      "mcp-client/client-setup/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.options.cwd": [
+      "mcp-client/client-setup/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.options.command": [
+      "mcp-client/client-setup/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.metadata.technologies": [
+      "mcp-client/client-setup/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.metadata.technologies.0": [
+      "mcp-client/client-setup/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.metadata.description": [
+      "mcp-client/client-setup/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.metadata.help": [
+      "mcp-client/client-setup/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.metadata.help.command": [
+      "mcp-client/client-setup/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.metadata.help.example": [
+      "mcp-client/client-setup/tsconfig.json",
+      "@nx/js/typescript"
+    ]
+  },
+  "packages/cve": {
+    "root": [
+      "packages/cve/package.json",
+      "nx/core/package-json"
+    ],
+    "projectType": [
+      "packages/cve/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets": [
+      "packages/cve/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck": [
+      "packages/cve/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.dependsOn": [
+      "packages/cve/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.options": [
+      "packages/cve/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.cache": [
+      "packages/cve/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.inputs": [
+      "packages/cve/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.outputs": [
+      "packages/cve/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.syncGenerators": [
+      "packages/cve/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.metadata": [
+      "packages/cve/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.executor": [
+      "packages/cve/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.options.cwd": [
+      "packages/cve/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.options.command": [
+      "packages/cve/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.metadata.technologies": [
+      "packages/cve/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.metadata.technologies.0": [
+      "packages/cve/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.metadata.description": [
+      "packages/cve/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.metadata.help": [
+      "packages/cve/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.metadata.help.command": [
+      "packages/cve/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.metadata.help.example": [
+      "packages/cve/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "name": [
+      "packages/cve/package.json",
+      "nx/core/package-json"
+    ],
+    "tags": [
+      "packages/cve/package.json",
+      "nx/core/package-json"
+    ],
+    "tags.npm:public": [
+      "packages/cve/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.targetGroups": [
+      "packages/cve/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.targetGroups.NPM Scripts": [
+      "packages/cve/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.targetGroups.NPM Scripts.0": [
+      "packages/cve/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.targetGroups.NPM Scripts.1": [
+      "packages/cve/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.description": [
+      "packages/cve/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js": [
+      "packages/cve/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js.packageName": [
+      "packages/cve/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js.packageMain": [
+      "packages/cve/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js.isInPackageManagerWorkspaces": [
+      "packages/cve/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.test": [
+      "packages/cve/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.test.executor": [
+      "packages/cve/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.test.options": [
+      "packages/cve/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.test.metadata": [
+      "packages/cve/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.test.options.script": [
+      "packages/cve/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.test.metadata.scriptContent": [
+      "packages/cve/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.test.metadata.runCommand": [
+      "packages/cve/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.build": [
+      "packages/cve/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.build.executor": [
+      "packages/cve/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.build.options": [
+      "packages/cve/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.build.metadata": [
+      "packages/cve/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.build.options.script": [
+      "packages/cve/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.build.metadata.scriptContent": [
+      "packages/cve/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.build.metadata.runCommand": [
+      "packages/cve/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.nx-release-publish": [
+      "packages/cve/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.nx-release-publish.executor": [
+      "packages/cve/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.nx-release-publish.dependsOn": [
+      "packages/cve/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.nx-release-publish.options": [
+      "packages/cve/package.json",
+      "nx/core/package-json"
+    ]
+  },
+  "packages/labs": {
+    "root": [
+      "packages/labs/package.json",
+      "nx/core/package-json"
+    ],
+    "projectType": [
+      "packages/labs/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets": [
+      "packages/labs/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck": [
+      "packages/labs/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.dependsOn": [
+      "packages/labs/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.options": [
+      "packages/labs/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.cache": [
+      "packages/labs/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.inputs": [
+      "packages/labs/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.outputs": [
+      "packages/labs/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.syncGenerators": [
+      "packages/labs/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.metadata": [
+      "packages/labs/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.executor": [
+      "packages/labs/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.options.cwd": [
+      "packages/labs/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.options.command": [
+      "packages/labs/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.metadata.technologies": [
+      "packages/labs/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.metadata.technologies.0": [
+      "packages/labs/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.metadata.description": [
+      "packages/labs/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.metadata.help": [
+      "packages/labs/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.metadata.help.command": [
+      "packages/labs/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.metadata.help.example": [
+      "packages/labs/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "name": [
+      "packages/labs/package.json",
+      "nx/core/package-json"
+    ],
+    "tags": [
+      "packages/labs/package.json",
+      "nx/core/package-json"
+    ],
+    "tags.npm:public": [
+      "packages/labs/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.targetGroups": [
+      "packages/labs/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.targetGroups.NPM Scripts": [
+      "packages/labs/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.targetGroups.NPM Scripts.0": [
+      "packages/labs/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.targetGroups.NPM Scripts.1": [
+      "packages/labs/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.description": [
+      "packages/labs/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js": [
+      "packages/labs/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js.packageName": [
+      "packages/labs/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js.packageMain": [
+      "packages/labs/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js.isInPackageManagerWorkspaces": [
+      "packages/labs/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.test": [
+      "packages/labs/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.test.executor": [
+      "packages/labs/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.test.options": [
+      "packages/labs/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.test.metadata": [
+      "packages/labs/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.test.options.script": [
+      "packages/labs/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.test.metadata.scriptContent": [
+      "packages/labs/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.test.metadata.runCommand": [
+      "packages/labs/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.build": [
+      "packages/labs/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.build.executor": [
+      "packages/labs/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.build.options": [
+      "packages/labs/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.build.metadata": [
+      "packages/labs/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.build.options.script": [
+      "packages/labs/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.build.metadata.scriptContent": [
+      "packages/labs/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.build.metadata.runCommand": [
+      "packages/labs/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.nx-release-publish": [
+      "packages/labs/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.nx-release-publish.executor": [
+      "packages/labs/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.nx-release-publish.dependsOn": [
+      "packages/labs/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.nx-release-publish.options": [
+      "packages/labs/package.json",
+      "nx/core/package-json"
+    ]
+  },
+  "packages/products": {
+    "root": [
+      "packages/products/package.json",
+      "nx/core/package-json"
+    ],
+    "projectType": [
+      "packages/products/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets": [
+      "packages/products/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck": [
+      "packages/products/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.dependsOn": [
+      "packages/products/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.options": [
+      "packages/products/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.cache": [
+      "packages/products/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.inputs": [
+      "packages/products/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.outputs": [
+      "packages/products/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.syncGenerators": [
+      "packages/products/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.metadata": [
+      "packages/products/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.executor": [
+      "packages/products/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.options.cwd": [
+      "packages/products/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.options.command": [
+      "packages/products/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.metadata.technologies": [
+      "packages/products/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.metadata.technologies.0": [
+      "packages/products/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.metadata.description": [
+      "packages/products/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.metadata.help": [
+      "packages/products/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.metadata.help.command": [
+      "packages/products/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.metadata.help.example": [
+      "packages/products/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "name": [
+      "packages/products/package.json",
+      "nx/core/package-json"
+    ],
+    "tags": [
+      "packages/products/package.json",
+      "nx/core/package-json"
+    ],
+    "tags.npm:public": [
+      "packages/products/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.targetGroups": [
+      "packages/products/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.targetGroups.NPM Scripts": [
+      "packages/products/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.targetGroups.NPM Scripts.0": [
+      "packages/products/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.targetGroups.NPM Scripts.1": [
+      "packages/products/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.description": [
+      "packages/products/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js": [
+      "packages/products/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js.packageName": [
+      "packages/products/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js.packageMain": [
+      "packages/products/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js.isInPackageManagerWorkspaces": [
+      "packages/products/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.test": [
+      "packages/products/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.test.executor": [
+      "packages/products/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.test.options": [
+      "packages/products/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.test.metadata": [
+      "packages/products/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.test.options.script": [
+      "packages/products/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.test.metadata.scriptContent": [
+      "packages/products/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.test.metadata.runCommand": [
+      "packages/products/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.build": [
+      "packages/products/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.build.executor": [
+      "packages/products/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.build.options": [
+      "packages/products/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.build.metadata": [
+      "packages/products/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.build.options.script": [
+      "packages/products/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.build.metadata.scriptContent": [
+      "packages/products/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.build.metadata.runCommand": [
+      "packages/products/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.nx-release-publish": [
+      "packages/products/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.nx-release-publish.executor": [
+      "packages/products/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.nx-release-publish.dependsOn": [
+      "packages/products/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.nx-release-publish.options": [
+      "packages/products/package.json",
+      "nx/core/package-json"
+    ]
+  },
+  "packages/weather": {
+    "root": [
+      "packages/weather/package.json",
+      "nx/core/package-json"
+    ],
+    "projectType": [
+      "packages/weather/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets": [
+      "packages/weather/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck": [
+      "packages/weather/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.dependsOn": [
+      "packages/weather/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.options": [
+      "packages/weather/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.cache": [
+      "packages/weather/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.inputs": [
+      "packages/weather/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.outputs": [
+      "packages/weather/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.syncGenerators": [
+      "packages/weather/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.metadata": [
+      "packages/weather/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.executor": [
+      "packages/weather/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.options.cwd": [
+      "packages/weather/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.options.command": [
+      "packages/weather/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.metadata.technologies": [
+      "packages/weather/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.metadata.technologies.0": [
+      "packages/weather/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.metadata.description": [
+      "packages/weather/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.metadata.help": [
+      "packages/weather/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.metadata.help.command": [
+      "packages/weather/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "targets.typecheck.metadata.help.example": [
+      "packages/weather/tsconfig.json",
+      "@nx/js/typescript"
+    ],
+    "name": [
+      "packages/weather/package.json",
+      "nx/core/package-json"
+    ],
+    "tags": [
+      "packages/weather/package.json",
+      "nx/core/package-json"
+    ],
+    "tags.npm:public": [
+      "packages/weather/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.targetGroups": [
+      "packages/weather/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.targetGroups.NPM Scripts": [
+      "packages/weather/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.targetGroups.NPM Scripts.0": [
+      "packages/weather/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.targetGroups.NPM Scripts.1": [
+      "packages/weather/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.targetGroups.NPM Scripts.2": [
+      "packages/weather/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.description": [
+      "packages/weather/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js": [
+      "packages/weather/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js.packageName": [
+      "packages/weather/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js.packageMain": [
+      "packages/weather/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js.isInPackageManagerWorkspaces": [
+      "packages/weather/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.test": [
+      "packages/weather/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.test.executor": [
+      "packages/weather/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.test.options": [
+      "packages/weather/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.test.metadata": [
+      "packages/weather/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.test.options.script": [
+      "packages/weather/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.test.metadata.scriptContent": [
+      "packages/weather/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.test.metadata.runCommand": [
+      "packages/weather/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.build": [
+      "packages/weather/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.build.executor": [
+      "packages/weather/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.build.options": [
+      "packages/weather/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.build.metadata": [
+      "packages/weather/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.build.options.script": [
+      "packages/weather/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.build.metadata.scriptContent": [
+      "packages/weather/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.build.metadata.runCommand": [
+      "packages/weather/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.dev": [
+      "packages/weather/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.dev.executor": [
+      "packages/weather/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.dev.options": [
+      "packages/weather/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.dev.metadata": [
+      "packages/weather/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.dev.options.script": [
+      "packages/weather/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.dev.metadata.scriptContent": [
+      "packages/weather/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.dev.metadata.runCommand": [
+      "packages/weather/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.nx-release-publish": [
+      "packages/weather/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.nx-release-publish.executor": [
+      "packages/weather/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.nx-release-publish.dependsOn": [
+      "packages/weather/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.nx-release-publish.options": [
+      "packages/weather/package.json",
+      "nx/core/package-json"
+    ]
+  }
+}
