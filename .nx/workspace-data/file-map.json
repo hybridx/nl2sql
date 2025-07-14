@@ -1,0 +1,391 @@
+{
+  "version": "6.0",
+  "nxVersion": "20.8.1",
+  "pathMappings": {},
+  "nxJsonPlugins": [
+    {
+      "name": "@nx/js/typescript",
+      "options": {
+        "typecheck": {
+          "targetName": "typecheck"
+        },
+        "build": {
+          "targetName": "build",
+          "configName": "tsconfig.lib.json",
+          "buildDepsName": "build-deps",
+          "watchDepsName": "watch-deps"
+        }
+      }
+    }
+  ],
+  "fileMap": {
+    "nonProjectFiles": [
+      {
+        "file": ".vscode/extensions.json",
+        "hash": "4134969992917317260"
+      },
+      {
+        "file": "mcp-client/frontend/src/components/CodeBlock.jsx",
+        "hash": "12787745853704353817"
+      },
+      {
+        "file": "backend/__pycache__/mcp_server.cpython-312.pyc",
+        "hash": "3613309449757473127"
+      },
+      {
+        "file": "backend/__pycache__/config.cpython-313.pyc",
+        "hash": "15370667433603685984"
+      },
+      {
+        "file": "mcp-client/frontend/src/components/AnalysisSection.jsx",
+        "hash": "7064822110354269397"
+      },
+      {
+        "file": "mcp-client/frontend/src/index.css",
+        "hash": "17857626296694272380"
+      },
+      {
+        "file": "LICENSE",
+        "hash": "12649885980860800067"
+      },
+      {
+        "file": "package.json",
+        "hash": "15404035212124754973"
+      },
+      {
+        "file": "mcp-client/frontend/src/components/LoadingIndicator.jsx",
+        "hash": "9229450335197871121"
+      },
+      {
+        "file": "mcp-client/frontend/src/components/ResultsTable.jsx",
+        "hash": "1155152210510592757"
+      },
+      {
+        "file": "README.md",
+        "hash": "1467066427181859627"
+      },
+      {
+        "file": "mcp-client/frontend/tailwind.config.js",
+        "hash": "3613986572710820453"
+      },
+      {
+        "file": "packages/.gitkeep",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "tsconfig.base.json",
+        "hash": "8900268571896142108"
+      },
+      {
+        "file": "nx.json",
+        "hash": "2052320565693354820"
+      },
+      {
+        "file": "backend/init.sql",
+        "hash": "16697091097068019323"
+      },
+      {
+        "file": "backend/products-database.json",
+        "hash": "4944726922051395484"
+      },
+      {
+        "file": ".prettierrc",
+        "hash": "16267754514737964994"
+      },
+      {
+        "file": "mcp-client/frontend/src/assets/react.svg",
+        "hash": "16069471864800376455"
+      },
+      {
+        "file": "mcp-client/frontend/public/vite.svg",
+        "hash": "16046085400642193116"
+      },
+      {
+        "file": "mcp-client/frontend/eslint.config.js",
+        "hash": "3482941610897540299"
+      },
+      {
+        "file": "backend/__pycache__/main.cpython-313.pyc",
+        "hash": "7640101015174515426"
+      },
+      {
+        "file": "mcp-client/frontend/src/components/QueryForm.jsx",
+        "hash": "9216080699843262230"
+      },
+      {
+        "file": "backend/__pycache__/schema_extractor.cpython-313.pyc",
+        "hash": "15445303121538760960"
+      },
+      {
+        "file": "backend/__pycache__/main.cpython-312.pyc",
+        "hash": "2971164623498007839"
+      },
+      {
+        "file": "backend/main.py",
+        "hash": "4420735706848788592"
+      },
+      {
+        "file": ".prettierignore",
+        "hash": "14688272390704683536"
+      },
+      {
+        "file": "mcp-client/frontend/src/main.jsx",
+        "hash": "5211065777171973056"
+      },
+      {
+        "file": "package-lock.json",
+        "hash": "2302080413523187502"
+      },
+      {
+        "file": "workflows/ci.yml",
+        "hash": "318148318667364299"
+      },
+      {
+        "file": "backend/verify_embeddings.py",
+        "hash": "4869519024249706893"
+      },
+      {
+        "file": "mcp-client/frontend/README.md",
+        "hash": "14497641823898172936"
+      },
+      {
+        "file": "mcp-client/frontend/vite.config.js",
+        "hash": "16225914092815047172"
+      },
+      {
+        "file": ".gitignore",
+        "hash": "5413839213824394566"
+      },
+      {
+        "file": "backend/config.py",
+        "hash": "8676528701327652684"
+      },
+      {
+        "file": "backend/mcp_server.py",
+        "hash": "11364479687861925422"
+      },
+      {
+        "file": "backend/Containerfile",
+        "hash": "1569049511955363816"
+      },
+      {
+        "file": "backend/schema_extractor.py",
+        "hash": "11938250307743625400"
+      },
+      {
+        "file": "backend/requirements.txt",
+        "hash": "14910358915528692055"
+      },
+      {
+        "file": "mcp-client/frontend/.gitignore",
+        "hash": "12795103521880630214"
+      },
+      {
+        "file": "mcp-client/frontend/src/App.jsx",
+        "hash": "8332321577387114552"
+      },
+      {
+        "file": "tsconfig.json",
+        "hash": "1379983966652230747"
+      },
+      {
+        "file": "backend/__pycache__/mcp_server.cpython-313.pyc",
+        "hash": "3041014818791358089"
+      },
+      {
+        "file": "mcp-client/frontend/index.html",
+        "hash": "14052092276720198347"
+      },
+      {
+        "file": "backend/__pycache__/config.cpython-312.pyc",
+        "hash": "5575856441252573685"
+      },
+      {
+        "file": "mcp-client/frontend/package.json",
+        "hash": "4822926480373362889"
+      }
+    ],
+    "projectFileMap": {
+      "products": [
+        {
+          "file": "packages/products/README.md",
+          "hash": "13813350758425472984"
+        },
+        {
+          "file": "packages/products/mcp-server.json",
+          "hash": "11379850262306616280"
+        },
+        {
+          "file": "packages/products/package.json",
+          "hash": "492436819244113868",
+          "deps": [
+            "npm:@types/node",
+            "npm:typescript@5.8.3",
+            "npm:@modelcontextprotocol/sdk",
+            "npm:zod"
+          ]
+        },
+        {
+          "file": "packages/products/src/index.ts",
+          "hash": "989395638807282414",
+          "deps": [
+            "npm:@modelcontextprotocol/sdk",
+            "npm:zod"
+          ]
+        },
+        {
+          "file": "packages/products/src/products-lifecycle.ts",
+          "hash": "12096992415814294495"
+        },
+        {
+          "file": "packages/products/tsconfig.json",
+          "hash": "291905043592183861"
+        }
+      ],
+      "cve": [
+        {
+          "file": "packages/cve/package-lock.json",
+          "hash": "1028848458792726981"
+        },
+        {
+          "file": "packages/cve/package.json",
+          "hash": "2010617199921978868",
+          "deps": [
+            "npm:@types/node",
+            "npm:typescript@5.8.3",
+            "npm:@modelcontextprotocol/sdk",
+            "npm:zod"
+          ]
+        },
+        {
+          "file": "packages/cve/src/index.ts",
+          "hash": "18406955979383226880",
+          "deps": [
+            "npm:@modelcontextprotocol/sdk",
+            "npm:zod"
+          ]
+        },
+        {
+          "file": "packages/cve/tsconfig.json",
+          "hash": "15885040509745932948"
+        }
+      ],
+      "labs": [
+        {
+          "file": "packages/labs/package.json",
+          "hash": "16395924663559203465",
+          "deps": [
+            "npm:@types/node",
+            "npm:ts-node",
+            "npm:typescript@5.8.3",
+            "npm:@modelcontextprotocol/sdk",
+            "npm:fuse.js",
+            "npm:zod"
+          ]
+        },
+        {
+          "file": "packages/labs/src/index.ts",
+          "hash": "9674280367916609245",
+          "deps": [
+            "npm:@modelcontextprotocol/sdk",
+            "npm:zod"
+          ]
+        },
+        {
+          "file": "packages/labs/tsconfig.json",
+          "hash": "291905043592183861"
+        }
+      ],
+      "mcp-client": [
+        {
+          "file": "mcp-client/client-setup/.gitIgnore",
+          "hash": "7017456405475698020"
+        },
+        {
+          "file": "mcp-client/client-setup/config/config.ts",
+          "hash": "15893568882349990000",
+          "deps": [
+            "npm:dotenv"
+          ]
+        },
+        {
+          "file": "mcp-client/client-setup/index.ts",
+          "hash": "13993979029468747694"
+        },
+        {
+          "file": "mcp-client/client-setup/package-lock.json",
+          "hash": "15992778732255870356"
+        },
+        {
+          "file": "mcp-client/client-setup/package.json",
+          "hash": "18419521340154764762",
+          "deps": [
+            "npm:@types/node",
+            "npm:typescript",
+            "npm:@modelcontextprotocol/sdk",
+            "npm:dotenv"
+          ]
+        },
+        {
+          "file": "mcp-client/client-setup/services/LLMService.ts",
+          "hash": "10609561483245795000"
+        },
+        {
+          "file": "mcp-client/client-setup/services/MCPService.ts",
+          "hash": "1529135856356856398",
+          "deps": [
+            "npm:@modelcontextprotocol/sdk"
+          ]
+        },
+        {
+          "file": "mcp-client/client-setup/services/ToolService.ts",
+          "hash": "4843444281597669490"
+        },
+        {
+          "file": "mcp-client/client-setup/tsconfig.json",
+          "hash": "5210232151282832393"
+        },
+        {
+          "file": "mcp-client/client-setup/types/interfaces.ts",
+          "hash": "5443904674210670170"
+        },
+        {
+          "file": "mcp-client/client-setup/utils/formatters.ts",
+          "hash": "4651477742072246648"
+        }
+      ],
+      "weather": [
+        {
+          "file": "packages/weather/README.md",
+          "hash": "14306368875200028599"
+        },
+        {
+          "file": "packages/weather/package-lock.json",
+          "hash": "17666254794954505117"
+        },
+        {
+          "file": "packages/weather/package.json",
+          "hash": "12712985695238145479",
+          "deps": [
+            "npm:@types/node",
+            "npm:typescript@5.8.3",
+            "npm:@modelcontextprotocol/sdk",
+            "npm:zod"
+          ]
+        },
+        {
+          "file": "packages/weather/src/index.ts",
+          "hash": "1612793761422198184",
+          "deps": [
+            "npm:@modelcontextprotocol/sdk",
+            "npm:zod"
+          ]
+        },
+        {
+          "file": "packages/weather/tsconfig.json",
+          "hash": "15885040509745932948"
+        }
+      ]
+    }
+  }
+}
